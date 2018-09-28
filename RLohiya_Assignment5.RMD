@@ -1,0 +1,86 @@
+---
+title: "Data605_Assignment5"
+author: "Ritesh Lohiya"
+date: "September 28, 2018"
+output: html_document
+---
+
+#                             ASSIGNMENT 5
+
+#           IS 605 FUNDAMENTALS OF COMPUTATIONAL MATHEMATICS
+
+Choose independently two numbers B and C at random from the interval [0, 1] with uniform density. Prove that B and C are proper probability distributions. Note that the point (B,C) is then chosen at random in the unit square.
+
+B and C are proper probabilty distrubution if both B and C have a 100% chance of falling in between [0,1]  and B+C combined have a 100% chance of falling between [0,2].
+
+```{r}
+#Randomly select 10000 numbers between 0 and 1
+B <- runif(10000, min = 0, max =1)
+head(B)
+tail(B)
+```
+
+```{r}
+#Randomly select 10000 numbers between 0 and 1
+C <- runif(10000, min = 0, max =1)
+head(C)
+tail(C)
+```
+
+```{r}
+head(B+C)
+tail(B+C)
+```
+
+
+Find the probability that
+
+(a) B + C < 1/2.
+
+```{r}
+a <- sum((B+C) < .5)/10000
+print(paste("The probability that B+C will be less than 1/2 is",a))
+```
+
+
+(b) BC < 1/2.
+
+```{r}
+b <- (sum((B*C) < .5)/10000)
+print(paste("The probability that B*C will be less than 1/2 is",b))
+```
+
+(c) |B ??? C| < 1/2.
+
+```{r}
+c <- sum(abs((B-C)) < .5)/10000
+print(paste("The probability that |B-C| will be less than 1/2 is",c))
+```
+
+(d) max{B,C} < 1/2.
+
+```{r}
+t <- 0
+for(i in 1:10000){
+  if(max(c(B[i],C[i])) < 0.5){
+    t = t+1
+  }
+}
+d <- t/10000
+print(paste("The probability that max{B,C} will be less than 1/2 is",d))
+```
+
+(e) min{B,C} < 1/2.
+
+```{r}
+t <- 0
+for(i in 1:10000){
+  if(min(c(B[i],C[i])) < 0.5){
+    t = t+1
+  }
+}
+e <- t/10000
+print(paste("The probability that min{B,C} will be less than 1/2 is",e))
+```
+
+
